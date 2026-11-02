@@ -26,7 +26,7 @@ def load_conversations():
 
 def createNewConversation(conversations):
     id = len(conversations)
-    conversation = Conversation(id=id, topic="New Top");
+    conversation = Conversation(id=id, topic="New Topic");
     conversations[id] = conversation
     return conversation
 
@@ -37,9 +37,9 @@ def convertConvoToDict(conversation):
         "content": conversation.messages
     }
     
-def saveConvo():
+def saveConvo(conversations):
     data = {}
-    for ID, conversation in conversation.items():        
+    for ID, conversation in conversations.items():        
         data[ID] = convertConvoToDict(conversation)
 
     with open("conversations.json", "w", encoding="utf-8") as file:
@@ -48,7 +48,8 @@ def saveConvo():
         )       
         
     with open("conversations.json", "r") as file:
-        conversation = json.load(file)
-        conversation[id]
+        data = json.load(file)
+        print(type(ID))
+        data[str(ID)]
         
       

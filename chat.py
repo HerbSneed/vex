@@ -3,8 +3,7 @@
 def convo(userChoice):
   if userChoice == 1:
     print("What do you want to know?")
-    knowledge = input()
-    userReq = f"{knowledge}. I want a short summary unless stated otherwise.\n"
+    userReq = input()
     return userReq
   elif userChoice == 2:
     return userChoice

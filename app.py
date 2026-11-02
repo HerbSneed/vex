@@ -17,15 +17,16 @@ while listening == True:
   if userChoice == 1:
     conversation = createNewConversation(conversations)
     userReq = convo(userChoice)
-    chatV1(userReq, currentChat)
+
+    chatV1(userReq, conversation)
     inProgress = True
     while inProgress == True:
       subChoice = subMenu()
       if subChoice == 1:
         userReq = continueConvo(subChoice)
-        chatV1(userReq, currentChat)
+        chatV1(userReq, conversation)
       elif subChoice == 2:
-        saveConvo(currentChat)
+        saveConvo(conversations)
         userChoice = mainMenu()
   elif userChoice == 2:
     pass

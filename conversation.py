@@ -4,6 +4,7 @@ class Conversation:
         self.topic = topic
         
         if messages is None:
-            self.messages = []
+            self.messages = [
+            ]
         else:
             self.messages = messages 
