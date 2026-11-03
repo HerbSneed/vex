@@ -8,3 +8,6 @@ class Conversation:
             ]
         else:
             self.messages = messages 
+            
+    def getMessages(self):
+        return self.messages

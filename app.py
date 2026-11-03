@@ -1,9 +1,8 @@
 #!/usr /bin/env python3
 from chat import convo, continueConvo
-from menu import mainMenu, subMenu
+from menu import *
 from ollama_client import chatV1
-from chat_history import saveConvo, load_conversations, createNewConversation
-
+from chat_history import saveConvo, load_conversations, createNewConversation, loadPastChat
 
 listening = True
 currentChat = []
@@ -17,7 +16,6 @@ while listening == True:
   if userChoice == 1:
     conversation = createNewConversation(conversations)
     userReq = convo(userChoice)
-
     chatV1(userReq, conversation)
     inProgress = True
     while inProgress == True:
@@ -27,9 +25,17 @@ while listening == True:
         chatV1(userReq, conversation)
       elif subChoice == 2:
         saveConvo(conversations)
-        userChoice = mainMenu()
+        break
   elif userChoice == 2:
-    pass
+    inConvo = True
+    # continue here
+    while (inConvo):
+      pastChatsChoice = pastChatsMenu()
+      pastContent = loadPastChat(pastChatsChoice, conversations)
+      newUserReg = input("Enter text")
+      chatV1(newUserReg, pastContent)
+      subChoice = subMenu()
+      
   elif userChoice == 3:
     listening = False
     print("Goodbye")

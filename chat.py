@@ -15,5 +15,5 @@ def convo(userChoice):
     
 def continueConvo(userChoice):
   if userChoice == 1:
-    userReq = input("Enter text\n");
+    userReq = input("Enter text: \n");
     return userReq

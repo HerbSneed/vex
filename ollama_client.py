@@ -12,8 +12,6 @@ def chatV1(string, conversation):
     "content": string
   })
   
-  print(conversation.messages)
-  # result = " ".join(conversation.messages.content)
   response: ChatResponse = chat(
     model='qwen3:8b',
     messages=[
@@ -29,6 +27,5 @@ def chatV1(string, conversation):
     "role": "assistant",
     "content": response.message.content
   })
-  print(conversation)
   print(response['message']['content'])
   return conversation

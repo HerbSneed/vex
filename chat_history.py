@@ -24,6 +24,12 @@ def load_conversations():
     
     return conversations
 
+def loadPastChat(userChoice, conversations):
+    for conversation in conversations.items():
+        if userChoice == int(conversation[0]):
+            pastContent = conversation[1]
+    return pastContent
+
 def createNewConversation(conversations):
     id = len(conversations)
     conversation = Conversation(id=id, topic="New Topic");
