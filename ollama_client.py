@@ -27,5 +27,7 @@ def chatV1(string, conversation):
     "role": "assistant",
     "content": response.message.content
   })
+  print("\n")
   print(response['message']['content'])
+  print("\n")
   return conversation

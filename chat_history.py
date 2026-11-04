@@ -55,7 +55,6 @@ def saveConvo(conversations):
         
     with open("conversations.json", "r") as file:
         data = json.load(file)
-        print(type(ID))
         data[str(ID)]
         
       
