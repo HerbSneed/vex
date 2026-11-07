@@ -1,6 +1,9 @@
 #!/usr /bin/env python3
 from ollama import chat
 from ollama import ChatResponse
+from util import timestamp
+
+currentTime = timestamp()
 
 def chatV1(string, conversation):
   SYSTEM_PROMPT = "Your name is Vex, you are my personal AI. My name is Herbie Sneed, people call me Herb or Morlique.  When I make a request I want short direct answers no more than 50 word unless stated otherwise."
@@ -8,7 +11,8 @@ def chatV1(string, conversation):
     conversation.topic = string
   
   conversation.messages.append({
-    "role": "user",
+    "role": "USER",
+    "timestamp": currentTime,
     "content": string
   })
   
@@ -24,7 +28,7 @@ def chatV1(string, conversation):
     ],
   )
   conversation.messages.append({
-    "role": "assistant",
+    "role": "VEX",
     "content": response.message.content
   })
   print("\n")

@@ -4,7 +4,6 @@ from ollama_client import chatV1
 from chat_history import saveConvo, load_conversations, createNewConversation, loadPastChat
 
 listening = True
-currentChat = []
 userReq = ""
 inProgress = False
 
