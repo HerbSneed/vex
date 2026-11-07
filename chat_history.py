@@ -1,10 +1,10 @@
 #!/usr /bin/env python3
 import json
-import datetime
 import os
 from conversation import Conversation
+from util import timestamp
 
-now = datetime.datetime.now()
+currentTime = timestamp()
 
 def load_conversations():
     if os.path.exists("conversations.json"):
@@ -18,6 +18,7 @@ def load_conversations():
     for ID, conversation_data in data.items():
         conversations[ID] = Conversation(
             id = conversation_data["id"],
+            created= conversation_data["created"],
             topic = conversation_data["topic"],
             messages = conversation_data["content"]
         ) 
@@ -28,17 +29,20 @@ def loadPastChat(userChoice, conversations):
     for conversation in conversations.items():
         if userChoice == int(conversation[0]):
             pastContent = conversation[1]
+            for i in pastContent.messages:
+                print(f"{i['role']}\n{i['content']}\n")
     return pastContent
 
 def createNewConversation(conversations):
     id = len(conversations)
-    conversation = Conversation(id=id, topic="New Topic");
+    conversation = Conversation(id=id, created=currentTime, topic="New Topic");
     conversations[id] = conversation
     return conversation
 
 def convertConvoToDict(conversation):
     return {
         "id": conversation.id,
+        "created": conversation.created,
         "topic": conversation.topic,
         "content": conversation.messages
     }
