@@ -1,22 +1,54 @@
 #!/usr /bin/env python3
-from chat_v1 import chatV1, saveChat
+from menu import *
+from ollama_client import chatV1
+from chat_history import saveConvo, load_conversations, createNewConversation, loadPastChat
 
 listening = True
 currentChat = []
+userReq = ""
+inProgress = False
+
+conversations = load_conversations()
 
 while listening == True:
-  user_req = ""
-  num = int(input("1: New chat\n2: View past chats\n3: Quit\n"))
-  if num == 1:
-    print("What do you want to know?")
-    knowledge = input()
-    user_req = f"{knowledge}. I want a short summary unless stated otherwise.\n"
-    chatV1(user_req, currentChat)
-  elif num == 2:
-    print("NOT COMPLETE")
-  elif num == 3:
-    print("Goodbye")
-    saveChat(currentChat)
+  userChoice = mainMenu()
+  if userChoice == 1:
+    conversation = createNewConversation(conversations)
+    userReq = (input("Let's get started! What would you like to know?\n"))
+    chatV1(userReq, conversation)
+    inProgress = True
+    while inProgress == True:
+      subChoice = subMenu()
+      if subChoice == 1:
+        userReq = input("Enter text: ");
+        chatV1(userReq, conversation)
+      elif subChoice == 2:
+        saveConvo(conversations)
+        break
+  elif userChoice == 2:
+      pastChatChoice = pastChatsMenu()
+      if pastChatChoice == -1:
+        pass
+      else:
+        pastContent = loadPastChat(pastChatChoice, conversations)
+        newUserReg = input("Enter text: ")
+        chatV1(newUserReg, pastContent)
+        inConvo = True
+        while inConvo:
+          subChoice = subMenu()
+          if subChoice == 1:
+            userReq = input("Enter text: ");
+            chatV1(userReq, pastContent)
+          elif subChoice == 2:
+            saveConvo(conversations)
+            inConvo = False
+  elif userChoice == 3:
     listening = False
+    print("Goodbye")
+    break
   else:
     print("Invalid Entry, please try again")
+      
+
+  
+
